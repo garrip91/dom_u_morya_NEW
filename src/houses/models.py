@@ -4,8 +4,9 @@ from django.db import models
 class House(models.Model):
 
     name = models.CharField("Название", max_length=50)
-    description = models.TextField("Описание")
     price = models.IntegerField("Цена")
+    description = models.TextField("Описание")
+    photo = models.ImageField("Фотография", upload_to='houses/photos', default='', blank=True)
 
     def __str__(self):
         return self.name
