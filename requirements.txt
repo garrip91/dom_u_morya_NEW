@@ -1,9 +1,11 @@
 asgiref==3.5.1
 Django==4.0.4 *1
-Pillow==9.1.0 *2
-pip==22.0.4
+djangorestframework==3.13.1 *2
+Pillow==9.1.0 *3
+pip==22.1
+pytz==2022.1
 setuptools==62.1.0
-sorl-thumbnail==12.8.0 *3
+sorl-thumbnail==12.8.0 *4
 sqlparse==0.4.2
 tzdata==2022.1
 wheel==0.37.1
