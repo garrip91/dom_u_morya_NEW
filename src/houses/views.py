@@ -13,6 +13,9 @@ from django.db.models import Q
 
 from rest_framework import generics
 from .serializers import HouseSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.forms import model_to_dict
 
 
 
@@ -52,7 +55,22 @@ def house_detail(request, house_id):
     })
 
 
-class HousesAPIView(generics.ListAPIView):
+# class HousesAPIView(generics.ListAPIView):
 
-    queryset = House.objects.all()
-    serializer_class = HouseSerializer
+    # queryset = House.objects.all()
+    # serializer_class = HouseSerializer
+class HousesAPIView(APIView):
+
+    def get(self, request):
+        lst = House.objects.all().values()
+        return Response({'posts': list(lst)})
+
+    def post(self, request):
+        post_new = House.objects.create(
+            name=request.data['name'],
+            price=request.data['price'],
+            description=request.data['description'],
+            photo=request.data['photo'],
+            active=request.data['active']
+        )
+        return Response({'post': model_to_dict(post_new)})
