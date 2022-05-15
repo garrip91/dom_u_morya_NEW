@@ -62,15 +62,31 @@ def house_detail(request, house_id):
 class HousesAPIView(APIView):
 
     def get(self, request):
-        lst = House.objects.all().values()
-        return Response({'posts': list(lst)})
+        h = House.objects.all()
+        return Response({'posts': HouseSerializer(h, many=True).data})
 
     def post(self, request):
-        post_new = House.objects.create(
-            name=request.data['name'],
-            price=request.data['price'],
-            description=request.data['description'],
-            photo=request.data['photo'],
-            active=request.data['active']
-        )
-        return Response({'post': model_to_dict(post_new)})
+        serializer = HouseSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'post': serializer.data})
+
+    def put(self, request, *args, **kwargs):
+        pk = kwargs.get('pk', None)
+        if not pk:
+            return Response({'error': 'Method PUT not allowed!'})
+        try:
+            instance = House.objects.get(pk=pk)
+        except:
+            return Response({'error': 'Object does not exists!'})
+        serializer = HouseSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'post': serializer.data})
+
+    def delete(self, request, *args, **kwargs):
+        pk = kwargs.get('pk', None)
+        if not pk:
+            return Response({'error': 'Method DELETE not allowed!'})
+        # здесь код для удаления записи с переданным pk
+        return Response({'post': F'delete post {str(pk)}'})
