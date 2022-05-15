@@ -11,6 +11,9 @@ from .forms import HousesFilterForm
 
 from django.db.models import Q
 
+from rest_framework import generics
+from .serializers import HouseSerializer
+
 
 
 # Create your views here.
@@ -47,3 +50,9 @@ def house_detail(request, house_id):
         'form': form,
         'sent': "sent" in request.GET
     })
+
+
+class HousesAPIView(generics.ListAPIView):
+
+    queryset = House.objects.all()
+    serializer_class = HouseSerializer

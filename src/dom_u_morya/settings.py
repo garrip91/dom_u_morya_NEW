@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'houses.apps.HousesConfig',
     'sorl.thumbnail',
     'orders',
+    
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
