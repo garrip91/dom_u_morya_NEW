@@ -11,7 +11,7 @@ from .forms import HousesFilterForm
 
 from django.db.models import Q
 
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from .serializers import HouseSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -55,38 +55,24 @@ def house_detail(request, house_id):
     })
 
 
-# class HousesAPIView(generics.ListAPIView):
+class HousesViewSet(viewsets.ModelViewSet):
+
+    queryset = House.objects.all()
+    serializer_class = HouseSerializer    
+
+# class HousesAPIList(generics.ListCreateAPIView):
 
     # queryset = House.objects.all()
     # serializer_class = HouseSerializer
-class HousesAPIView(APIView):
 
-    def get(self, request):
-        h = House.objects.all()
-        return Response({'posts': HouseSerializer(h, many=True).data})
 
-    def post(self, request):
-        serializer = HouseSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({'post': serializer.data})
+# class HousesAPIUpdate(generics.UpdateAPIView):
 
-    def put(self, request, *args, **kwargs):
-        pk = kwargs.get('pk', None)
-        if not pk:
-            return Response({'error': 'Method PUT not allowed!'})
-        try:
-            instance = House.objects.get(pk=pk)
-        except:
-            return Response({'error': 'Object does not exists!'})
-        serializer = HouseSerializer(data=request.data, instance=instance)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({'post': serializer.data})
+    # queryset = House.objects.all()
+    # serializer_class = HouseSerializer
 
-    def delete(self, request, *args, **kwargs):
-        pk = kwargs.get('pk', None)
-        if not pk:
-            return Response({'error': 'Method DELETE not allowed!'})
-        # здесь код для удаления записи с переданным pk
-        return Response({'post': F'delete post {str(pk)}'})
+
+# class HousesAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
+
+    # queryset = House.objects.all()
+    # serializer_class = HouseSerializer

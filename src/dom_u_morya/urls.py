@@ -14,20 +14,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from houses.views import houses_list, house_detail, HousesAPIView
+from houses.views import houses_list, house_detail, HousesViewSet 
+#HousesAPIDetailView,  #HousesAPIUpdate,  #HousesAPIList
 
 from django.conf.urls.static import static
 from django.conf import settings
 
+from rest_framework import routers
 
+
+
+#router = routers.SimpleRouter()
+router = routers.DefaultRouter()
+router.register(R'houses', HousesViewSet)
+print(router.urls)
 
 urlpatterns = [
     path('', houses_list, name='home'),
     path('<int:house_id>/', house_detail, name='house'),
-    path('api/v1/houseslist/', HousesAPIView.as_view()),
-    path('api/v1/houseslist/<int:pk>/', HousesAPIView.as_view()),
+#    path('api/v1/houseslist/', HousesViewSet.as_view({'get': 'list'})),
+#    path('api/v1/houseslist/<int:pk>/', HousesViewSet.as_view({'put': 'update'})),
+    #path('api/v1/housesdetail/<int:pk>/', HousesAPIDetailView.as_view()),
+    path('api/v1/', include(router.urls)),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
