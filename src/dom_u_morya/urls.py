@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from houses.views import houses_list, house_detail, HousesViewSet 
-#HousesAPIDetailView,  #HousesAPIUpdate,  #HousesAPIList
+from houses.views import houses_list, house_detail, HousesAPIListView, HousesAPIDestroyView, HousesAPIUpdateView
+#HousesViewSet, HousesAPIDetailView,  #HousesAPIUpdate
 
 from django.conf.urls.static import static
 from django.conf import settings
@@ -26,18 +26,14 @@ from rest_framework import routers
 
 
 
-#router = routers.SimpleRouter()
-router = routers.DefaultRouter()
-router.register(R'houses', HousesViewSet)
-print(router.urls)
-
 urlpatterns = [
     path('', houses_list, name='home'),
     path('<int:house_id>/', house_detail, name='house'),
-#    path('api/v1/houseslist/', HousesViewSet.as_view({'get': 'list'})),
+    path('api/v1/houseslist/', HousesAPIListView.as_view()),
 #    path('api/v1/houseslist/<int:pk>/', HousesViewSet.as_view({'put': 'update'})),
-    #path('api/v1/housesdetail/<int:pk>/', HousesAPIDetailView.as_view()),
-    path('api/v1/', include(router.urls)),
+    #path('api/v1/housedetail/<int:pk>/', HousesAPIDetailView.as_view()),
+    path('api/v1/houseupdate/<int:pk>/', HousesAPIUpdateView.as_view()),
+    path('api/v1/housedelete/<int:pk>/', HousesAPIDestroyView.as_view()),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

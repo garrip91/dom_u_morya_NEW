@@ -17,6 +17,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.forms import model_to_dict
 
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+
 
 
 # Create your views here.
@@ -55,21 +58,25 @@ def house_detail(request, house_id):
     })
 
 
-class HousesViewSet(viewsets.ModelViewSet):
+class HousesAPIListView(generics.ListCreateAPIView):
 
     queryset = House.objects.all()
-    serializer_class = HouseSerializer    
-
-# class HousesAPIList(generics.ListCreateAPIView):
-
-    # queryset = House.objects.all()
-    # serializer_class = HouseSerializer
+    serializer_class = HouseSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
-# class HousesAPIUpdate(generics.UpdateAPIView):
+class HousesAPIUpdateView(generics.RetrieveUpdateAPIView):
 
-    # queryset = House.objects.all()
-    # serializer_class = HouseSerializer
+    queryset = House.objects.all()
+    serializer_class = HouseSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
+
+
+class HousesAPIDestroyView(generics.RetrieveDestroyAPIView):
+
+    queryset = House.objects.all()
+    serializer_class = HouseSerializer
+    permission_classes = (IsAdminOrReadOnly,)
 
 
 # class HousesAPIDetailView(generics.RetrieveUpdateDestroyAPIView):

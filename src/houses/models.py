@@ -1,5 +1,9 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
+
+
 # Create your models here:
 class House(models.Model):
 
@@ -8,6 +12,7 @@ class House(models.Model):
     description = models.TextField("Описание")
     photo = models.ImageField("Фотография", upload_to='houses/photos', default='', blank=True)
     active = models.BooleanField("Активен", default=True)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name
