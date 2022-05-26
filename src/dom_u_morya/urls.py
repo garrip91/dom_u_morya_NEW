@@ -34,7 +34,8 @@ urlpatterns = [
     #path('api/v1/housedetail/<int:pk>/', HousesAPIDetailView.as_view()),
     path('api/v1/houseupdate/<int:pk>/', HousesAPIUpdateView.as_view()),
     path('api/v1/housedelete/<int:pk>/', HousesAPIDestroyView.as_view()),
-    path('api/v1/drf-auth/', include('rest_framework.urls')),
+    path('api/v1/auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
