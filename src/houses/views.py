@@ -18,7 +18,7 @@ from rest_framework.response import Response
 from django.forms import model_to_dict
 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
-from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly, IsAuthenticated
 
 
 
@@ -69,7 +69,7 @@ class HousesAPIUpdateView(generics.RetrieveUpdateAPIView):
 
     queryset = House.objects.all()
     serializer_class = HouseSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
 
 
 class HousesAPIDestroyView(generics.RetrieveDestroyAPIView):
