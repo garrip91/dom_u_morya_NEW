@@ -2,4 +2,4 @@ __pycache__/
 *.pyc
 cache/
 db.sqlite3
-SECRET_KEY.py
+.env
