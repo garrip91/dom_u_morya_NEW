@@ -1,6 +1,6 @@
 <br/>
 <p align="center">
-  <a href="https://github.com/garrip91/KINOMONSTER">
+  <a href="https://github.com/garrip91/dom_u_morya_NEW">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -13,7 +13,7 @@
   </p>
 </p>
 
-![Contributors](https://img.shields.io/github/contributors/Garrip91/KINOMONSTER?color=dark-green) ![Issues](https://img.shields.io/github/issues/Garrip91/KINOMONSTER) 
+![Contributors](https://img.shields.io/github/contributors/Garrip91/dom_u_morya_NEW?color=dark-green) ![Issues](https://img.shields.io/github/issues/Garrip91/dom_u_morya_NEW) 
 
 ## Table Of Contents
 
@@ -62,7 +62,7 @@ https://www.python.org/
 1. Clone the repo
 
 ```sh
-git clone https://github.com/garrip91/KINOMONSTER
+git clone https://github.com/garrip91/dom_u_morya_NEW
 ```
 
 
@@ -109,7 +109,7 @@ python manage.py runserver
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](https://github.com/Garrip91/KINOMONSTER/blob/main/LICENSE.md) for more information.
+Distributed under the MIT License. See [LICENSE](https://github.com/Garrip91/dom_u_morya_NEW/blob/main/LICENSE.md) for more information.
 
 ## Authors
 
@@ -118,5 +118,5 @@ Distributed under the MIT License. See [LICENSE](https://github.com/Garrip91/KIN
 ## Acknowledgements
 
 * [Garrip91](https://github.com/garrip91)
-* [KINOMONSTER](https://github.com/garrip91/KINOMONSTER)
+* [dom_u_morya_NEW](https://github.com/garrip91/dom_u_morya_NEW)
 * [Python](https://www.python.org/)
